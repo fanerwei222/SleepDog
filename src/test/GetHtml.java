@@ -1,6 +1,7 @@
 package test;
 
 import bean.ZhiHu;
+import utils.FileReaderWriter;
 import utils.Spider;
 
 import java.io.BufferedReader;
@@ -30,7 +31,8 @@ public class GetHtml {
         //String imgSrc = regexString(result, "src=//(.+?) ");
         ArrayList<ZhiHu> zhiHus = Spider.getZhiHu(result);
         for (ZhiHu zhiHu : zhiHus){
-            System.out.println(zhiHu);
+            FileReaderWriter.writeToFile(zhiHu.writeString(),
+                    "D:/software/OpenSource/BUG/file/知乎_编辑推荐", true);
         }
     }
 
