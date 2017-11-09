@@ -96,12 +96,33 @@ public class Spider {
         Pattern urlPattern = Pattern.compile("question_link.+?href=\"(.+?)\"");
         Matcher urlMatcher = urlPattern.matcher(content);
 
+
         boolean isFind = questionMatcher.find() && urlMatcher.find();
         while (isFind){
             ZhiHu zhiHu = new ZhiHu();
+            String questionUrl = "https://www.zhihu.com" + urlMatcher.group(1);
             zhiHu.setQuestion(questionMatcher.group(1));
-            zhiHu.setZhihuUrl("http://www.zhihu.com" + urlMatcher.group(1));
+            zhiHu.setZhihuUrl(questionUrl);
 
+            String answer = sendGet(questionUrl);
+            //描述
+            Pattern descriptionPattern = Pattern.compile("<span.+?RichText.+?>(.*?)</span>");
+            Matcher descriptionMatcher = descriptionPattern.matcher(answer);
+            boolean desIsFind = descriptionMatcher.find();
+            while (desIsFind){
+                zhiHu.setQuestionDescription(descriptionMatcher.group(1));
+                desIsFind = descriptionMatcher.find();
+            }
+            //回答
+            Pattern answerPattern = Pattern.compile("<div.+?RichContent-inner.+?>(.*?)</div>");
+            Matcher answerMatcher = answerPattern.matcher(answer);
+            boolean answerIsFind =answerMatcher.find();
+            ArrayList<String> answerList = new ArrayList<>();
+            while (answerIsFind){
+                answerList.add(answerMatcher.group(1));
+                answerIsFind =answerMatcher.find();
+            }
+            zhiHu.setAnswers(answerList);
             result.add(zhiHu);
             isFind = questionMatcher.find() && urlMatcher.find();
         }
