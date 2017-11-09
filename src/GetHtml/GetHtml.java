@@ -1,4 +1,4 @@
-package test;
+package GetHtml;
 
 import bean.ZhiHu;
 import utils.FileReaderWriter;
