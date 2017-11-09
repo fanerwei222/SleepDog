@@ -9,11 +9,13 @@ import java.util.ArrayList;
 public class ZhiHu {
     public String question; //问题
     public String zhihuUrl; //网页链接
+    public String questionDescription; //问题描述
     public ArrayList<String> answers; //所有回答
 
     public ZhiHu(){
         this.question = "";
         this.zhihuUrl = "";
+        this.questionDescription = "";
         this.answers = new ArrayList<>();
     }
 
@@ -41,11 +43,20 @@ public class ZhiHu {
         this.answers = answers;
     }
 
+    public String getQuestionDescription() {
+        return questionDescription;
+    }
+
+    public void setQuestionDescription(String questionDescription) {
+        this.questionDescription = questionDescription;
+    }
+
     @Override
     public String toString() {
         return "ZhiHu{" +
                 "question='" + question + '\'' +
                 ", zhihuUrl='" + zhihuUrl + '\'' +
+                ", questionDescription='" + questionDescription + '\'' +
                 ", answers=" + answers +
                 '}';
     }
