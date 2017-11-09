@@ -60,4 +60,23 @@ public class ZhiHu {
                 ", answers=" + answers +
                 '}';
     }
+
+    /**
+     * 格式化写入到本地时的排版
+     * @return
+     */
+    public String writeString() {
+        String result = "";
+        result += "问题：" + question + "\r\n";
+        result += "描述：" + questionDescription + "\r\n";
+        result += "链接：" + zhihuUrl + "\r\n";
+        for (int i = 0; i < answers.size(); i++) {
+            result += "回答" + (i+1) + "：" + answers.get(i) + "\r\n";
+        }
+        result += "\r\n\r\n\r\n\r\n";
+        // 将其中的html标签进行筛选
+        result = result.replaceAll("<br>", "\r\n");
+        result = result.replaceAll("<.*?>", "");
+        return result;
+    }
 }
