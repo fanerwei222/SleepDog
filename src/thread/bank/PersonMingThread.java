@@ -18,7 +18,7 @@ public class PersonMingThread extends Thread{
     @Override
     public void run() {
         while (Bank.money >= 200){
-            synchronized (bank){
+            synchronized (bank){//拥有bank锁之后才执行
                 if (Bank.money >= 200){
                     bank.ATM(200, userName);
                 }

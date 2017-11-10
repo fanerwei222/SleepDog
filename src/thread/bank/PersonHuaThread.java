@@ -18,7 +18,7 @@ public class PersonHuaThread extends Thread{
     @Override
     public void run() {
         while (Bank.money >= 100){
-            synchronized (bank){
+            synchronized (bank){//拥有bank锁之后才执行
                 if (Bank.money >= 100){
                     bank.Counter(100, userName);
                 }
